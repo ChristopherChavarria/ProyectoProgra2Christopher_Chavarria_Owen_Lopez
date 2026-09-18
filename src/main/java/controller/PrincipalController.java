@@ -39,7 +39,7 @@ public class PrincipalController {
         }
     }
 
-    // ¡Aquí está el cambio del nombre! (abrirGestionActividades)
+    
     @FXML
     void abrirGestionActividades(ActionEvent event) {
         try {

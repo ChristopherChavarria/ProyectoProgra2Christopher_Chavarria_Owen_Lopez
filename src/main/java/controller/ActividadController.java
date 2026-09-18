@@ -144,8 +144,7 @@ public class ActividadController implements Initializable {
             return;
         }
 
-        // Si tu base de datos requiere IDs válidos para evento_id, expositor_id o tipo_actividad_id,
-        // asegúrate de que existan registros con ID 1 en esas tablas, o usa NULL si las columnas lo permiten.
+        
         String sql = "INSERT INTO actividad (nombre, descripcion, fecha, hora_inicio, hora_finalizacion, ubicacion, capacidad_max, estado, evento_id, expositor_id, tipo_actividad_id) VALUES (?, ?, ?, ?, ?, ?, ?, 'abierta', 1, 1, 1)";
 
         try (Connection conn = Conexion.obtenerConexion();
