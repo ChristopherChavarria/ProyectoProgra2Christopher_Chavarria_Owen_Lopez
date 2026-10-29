@@ -1,23 +1,49 @@
 package conexion;
 
+import excepciones.PersistenciaException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
+/**
+ * Fábrica de conexiones JDBC.
+ * Los datos de acceso se leen de db.properties (en la carpeta del proyecto),
+ * que NO se sube a GitHub para no publicar la contraseña.
+ */
 public class Conexion {
-   private static final String URL = "jdbc:mysql://mysql.us.cloudlogin.co:3306/gamabasis_piig8?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "gamabasis_piig8";
-    
-   private static final String PASSWORD = "plMH9Tu55#";
+
+    private static final String ARCHIVO = "db.properties";
+    private static Properties config;
+
+    private Conexion() {
+    }
 
     public static Connection obtenerConexion() {
-        Connection conexion = null;
+        Properties p = configuracion();
         try {
-            conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("¡Conexión exitosa a la base de datos!");
+            return DriverManager.getConnection(p.getProperty("db.url"),
+                    p.getProperty("db.usuario"), p.getProperty("db.clave", ""));
         } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+            throw new PersistenciaException("No se pudo conectar con la base de datos. "
+                    + "Revise su conexión a internet y los datos de db.properties.", e);
         }
-        return conexion;
+    }
+
+    private static synchronized Properties configuracion() {
+        if (config == null) {
+            Properties p = new Properties();
+            try (InputStream in = new FileInputStream(ARCHIVO)) {
+                p.load(in);
+            } catch (IOException e) {
+                throw new PersistenciaException("No se encontró el archivo " + ARCHIVO
+                        + ". Copie db.properties.ejemplo como db.properties y complete sus datos.", e);
+            }
+            config = p;
+        }
+        return config;
     }
 }

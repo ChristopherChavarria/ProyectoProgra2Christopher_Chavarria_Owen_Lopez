@@ -1,1 +1,4 @@
 /target/
+db.properties
+nbactions.xml
+nb-configuration.xml
