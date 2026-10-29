@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -12,84 +11,223 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ActividadController">
-   <top>
-      <VBox alignment="CENTER" prefHeight="70.0" prefWidth="850.0" style="-fx-background-color: #27ae60;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Módulo de Gestión de Actividades" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <VBox spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane hgap="10.0" vgap="10.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="120.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="300.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Nombre:" />
-                  <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
-                  
-                  <Label text="Descripción:" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  
-                  <Label text="Fecha:" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="dpFecha" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  
-                  <Label text="Hora Inicio:" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtHoraInicio" promptText="Ej: 14:00 o 4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  
-                  <Label text="Hora Fin:" GridPane.rowIndex="4" />
-                  <TextField fx:id="txtHoraFin" promptText="Ej: 16:00 o 7" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  
-                  <Label text="Ubicación:" GridPane.rowIndex="5" />
-                  <TextField fx:id="txtUbicacion" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  
-                  <Label text="Capacidad Máx:" GridPane.rowIndex="6" />
-                  <Spinner fx:id="spnCapacidadMax" editable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-               </children>
-            </GridPane>
-            <HBox spacing="10.0">
-               <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarActividad" text="Guardar Actividad" />
-                  <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#regresarPrincipal" style="-fx-background-color: #7f8c8d;" text="Volver al Menú" textFill="WHITE" />
-               </children>
-            </HBox>
-            <TableView fx:id="tableActividades" prefHeight="180.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
-                <TableColumn fx:id="colNombre" prefWidth="130.0" text="Nombre" />
-                <TableColumn fx:id="colDescripcion" prefWidth="180.0" text="Descripción" />
-                <TableColumn fx:id="colFecha" prefWidth="90.0" text="Fecha" />
-                <TableColumn fx:id="colHoraInicio" prefWidth="80.0" text="H. Inicio" />
-                <TableColumn fx:id="colHoraFin" prefWidth="80.0" text="H. Fin" />
-                <TableColumn fx:id="colUbicacion" prefWidth="110.0" text="Ubicación" />
-                <TableColumn fx:id="colCapacidad" prefWidth="60.0" text="Cupo" />
-              </columns>
-            </TableView>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ActividadController"
+            stylesheets="@estilos.css"
+            prefWidth="1200"
+            prefHeight="800"
+            minWidth="950"
+            minHeight="650"
+            style="-fx-background-color: #080f22;">
+
+    <top>
+        <VBox spacing="6"
+              style="-fx-background-color: #080f22; -fx-padding: 22 28 12 28;">
+
+            <Label text="Gestión de actividades"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #ffffff;"/>
+
+            <Label text="Organizá y administrá tus actividades, horarios y cupos."
+                   style="-fx-font-size: 14px; -fx-text-fill: #9fb5d9;"/>
+
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="16"
+              fillWidth="true"
+              style="-fx-background-color: #080f22; -fx-padding: 10 28 22 28;">
+
+            <VBox spacing="15"
+                  style="-fx-background-color: #101b30; -fx-background-radius: 12; -fx-border-color: #344d73; -fx-border-radius: 12; -fx-padding: 20;">
+
+                <Label text="Nueva actividad"
+                       style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: #ffffff;"/>
+
+                <HBox spacing="24"
+                      fillHeight="true">
+
+                    <GridPane hgap="12"
+                              vgap="14"
+                              maxWidth="Infinity"
+                              HBox.hgrow="ALWAYS">
+
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="100"
+                                               prefWidth="110"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Nombre:"
+                               GridPane.rowIndex="0"/>
+
+                        <TextField fx:id="txtNombre"
+                                   promptText="Nombre de la actividad"
+                                   maxWidth="Infinity"
+                                   GridPane.columnIndex="1"
+                                   GridPane.rowIndex="0"/>
+
+                        <Label text="Descripción:"
+                               GridPane.rowIndex="1"/>
+
+                        <TextField fx:id="txtDescripcion"
+                                   promptText="Descripción de la actividad"
+                                   maxWidth="Infinity"
+                                   GridPane.columnIndex="1"
+                                   GridPane.rowIndex="1"/>
+
+                        <Label text="Fecha:"
+                               GridPane.rowIndex="2"/>
+
+                        <DatePicker fx:id="dpFecha"
+                                    promptText="Seleccioná una fecha"
+                                    maxWidth="Infinity"
+                                    GridPane.columnIndex="1"
+                                    GridPane.rowIndex="2"/>
+
+                        <Label text="Ubicación:"
+                               GridPane.rowIndex="3"/>
+
+                        <TextField fx:id="txtUbicacion"
+                                   promptText="Lugar de la actividad"
+                                   maxWidth="Infinity"
+                                   GridPane.columnIndex="1"
+                                   GridPane.rowIndex="3"/>
+
+                    </GridPane>
+
+                    <GridPane hgap="12"
+                              vgap="14"
+                              maxWidth="Infinity"
+                              HBox.hgrow="ALWAYS">
+
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="125"
+                                               prefWidth="140"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Hora de inicio:"
+                               GridPane.rowIndex="0"/>
+
+                        <TextField fx:id="txtHoraInicio"
+                                   promptText="Ejemplo: 14:00"
+                                   maxWidth="Infinity"
+                                   GridPane.columnIndex="1"
+                                   GridPane.rowIndex="0"/>
+
+                        <Label text="Hora de finalización:"
+                               GridPane.rowIndex="1"/>
+
+                        <TextField fx:id="txtHoraFin"
+                                   promptText="Ejemplo: 16:00"
+                                   maxWidth="Infinity"
+                                   GridPane.columnIndex="1"
+                                   GridPane.rowIndex="1"/>
+
+                        <Label text="Capacidad máxima:"
+                               GridPane.rowIndex="2"/>
+
+                        <Spinner fx:id="spnCapacidadMax"
+                                 editable="true"
+                                 maxWidth="Infinity"
+                                 GridPane.columnIndex="1"
+                                 GridPane.rowIndex="2"/>
+
+                    </GridPane>
+
+                </HBox>
+
+                <HBox spacing="12"
+                      alignment="CENTER_RIGHT">
+
+                    <Button fx:id="btnVolver"
+                            text="Volver al menú"
+                            mnemonicParsing="false"
+                            onAction="#regresarPrincipal"
+                            styleClass="boton-secundario"
+                            prefHeight="43"/>
+
+                    <Button fx:id="btnGuardar"
+                            text="Guardar actividad"
+                            mnemonicParsing="false"
+                            onAction="#guardarActividad"
+                            styleClass="boton-primario"
+                            prefHeight="43"/>
+
+                </HBox>
+
+            </VBox>
+
+            <VBox spacing="12"
+                  minHeight="240"
+                  VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: #101b30; -fx-background-radius: 12; -fx-border-color: #344d73; -fx-border-radius: 12; -fx-padding: 18;">
+
+                <Label text="Actividades registradas"
+                       style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: #ffffff;"/>
+
+                <Label text="Consultá las actividades guardadas en el sistema."
+                       style="-fx-font-size: 13px; -fx-text-fill: #9fb5d9;"/>
+
+                <TableView fx:id="tableActividades"
+                           prefHeight="320"
+                           minHeight="170"
+                           maxHeight="Infinity"
+                           maxWidth="Infinity"
+                           VBox.vgrow="ALWAYS"
+                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+
+                    <placeholder>
+                        <Label text="No hay actividades registradas"
+                               style="-fx-text-fill: #9fb5d9; -fx-font-size: 15px;"/>
+                    </placeholder>
+
+                    <columns>
+
+                        <TableColumn fx:id="colId"
+                                     text="ID"
+                                     prefWidth="55"/>
+
+                        <TableColumn fx:id="colNombre"
+                                     text="Nombre"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colDescripcion"
+                                     text="Descripción"
+                                     prefWidth="190"/>
+
+                        <TableColumn fx:id="colFecha"
+                                     text="Fecha"
+                                     prefWidth="110"/>
+
+                        <TableColumn fx:id="colHoraInicio"
+                                     text="H. Inicio"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="colHoraFin"
+                                     text="H. Fin"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="colUbicacion"
+                                     text="Ubicación"
+                                     prefWidth="160"/>
+
+                        <TableColumn fx:id="colCapacidad"
+                                     text="Cupo"
+                                     prefWidth="85"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+        </VBox>
+    </center>
+
 </BorderPane>

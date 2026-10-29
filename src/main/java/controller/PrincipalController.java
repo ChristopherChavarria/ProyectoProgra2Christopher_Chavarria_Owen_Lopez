@@ -1,16 +1,16 @@
+
 package controller;
 
+import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class PrincipalController {
 
@@ -21,40 +21,56 @@ public class PrincipalController {
     private Button btnGestionActividades;
 
     @FXML
-    void abrirGestionEventos(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/app/evento.xml"));
-            Stage stage = (Stage) btnGestionEventos.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Módulo de Gestión de Eventos");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error de Navegación");
-            alert.setHeaderText("No se pudo abrir el módulo de eventos");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
+    private void abrirGestionEventos(ActionEvent event) {
+        abrirModulo("/app/evento.xml", "Módulo de Gestión de Eventos");
     }
 
-    
     @FXML
-    void abrirGestionActividades(ActionEvent event) {
+    private void abrirGestionActividades(ActionEvent event) {
+        abrirModulo("/app/actividad.xml", "Módulo de Gestión de Actividades");
+    }
+
+    private void abrirModulo(String ruta, String titulo) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/app/actividad.xml"));
-            Stage stage = (Stage) btnGestionActividades.getScene().getWindow();
+            URL recurso = getClass().getResource(ruta);
+
+            if (recurso == null) {
+                throw new IOException("No se encontró el archivo: " + ruta);
+            }
+
+            FXMLLoader loader = new FXMLLoader(recurso);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) btnGestionEventos.getScene().getWindow();
+
+            boolean maximizada = stage.isMaximized();
+
             stage.setScene(new Scene(root));
-            stage.setTitle("Gestión de Actividades");
+            stage.setTitle(titulo);
+            stage.setMaximized(maximizada);
             stage.show();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
-            
-            Alert alert = new Alert(AlertType.ERROR);
+
+            String detalle = e.getMessage();
+
+            if (detalle == null) {
+                detalle = e.toString();
+            }
+
+            Throwable causa = e.getCause();
+
+            while (causa != null) {
+                detalle += "\nCausa: " + causa.toString();
+                causa = causa.getCause();
+            }
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error de Navegación");
-            alert.setHeaderText("No se pudo abrir el módulo de actividades");
-            alert.setContentText(e.getMessage());
+            alert.setHeaderText("No se pudo abrir el módulo");
+            alert.setContentText(detalle);
+            alert.getDialogPane().setPrefWidth(650);
             alert.showAndWait();
         }
     }

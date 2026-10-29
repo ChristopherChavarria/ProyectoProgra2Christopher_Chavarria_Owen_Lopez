@@ -11,70 +11,185 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EventoController">
-   <top>
-      <VBox alignment="CENTER" prefHeight="70.0" prefWidth="850.0" style="-fx-background-color: #2980b9;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Módulo de Gestión de Eventos" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
+<BorderPane prefHeight="720.0"
+            prefWidth="1000.0"
+            stylesheets="@estilos.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EventoController">
+
+    <top>
+        <VBox alignment="CENTER_LEFT"
+              spacing="6.0"
+              styleClass="encabezado"
+              BorderPane.alignment="CENTER">
+
+            <padding>
+                <Insets top="22.0" right="28.0"
+                        bottom="22.0" left="28.0"/>
+            </padding>
+
+            <Label text="Gestión de eventos">
+                <font>
+                    <Font name="Segoe UI Bold" size="28.0"/>
+                </font>
             </Label>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <VBox spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane hgap="10.0" vgap="10.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="120.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="300.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Nombre:" />
-                  <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
-                  
-                  <Label text="Descripción:" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  
-                  <Label text="Fecha:" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="dpFecha" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  
-                  <Label text="Lugar:" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtLugar" promptText="Ej: Auditorio Principal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               </children>
-            </GridPane>
-            <HBox spacing="10.0">
-               <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarEvento" text="Guardar Evento" />
-                  <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#regresarPrincipal" style="-fx-background-color: #7f8c8d;" text="Volver al Menú" textFill="WHITE" />
-               </children>
-            </HBox>
-            <TableView fx:id="tableEventos" prefHeight="180.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
-                <TableColumn fx:id="colNombre" prefWidth="150.0" text="Nombre" />
-                <TableColumn fx:id="colDescripcion" prefWidth="220.0" text="Descripción" />
-                <TableColumn fx:id="colFechaInicio" prefWidth="110.0" text="Fecha" />
-                <TableColumn fx:id="colLugar" prefWidth="150.0" text="Lugar" />
-                <TableColumn fx:id="colEstado" prefWidth="110.0" text="Estado" />
-              </columns>
-            </TableView>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
+
+            <Label text="Organizá y administrá tus próximos eventos"
+                   style="-fx-text-fill: #9fb5d9;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="20.0" BorderPane.alignment="CENTER">
+
+            <padding>
+                <Insets top="24.0" right="28.0"
+                        bottom="24.0" left="28.0"/>
+            </padding>
+
+            <!-- Tarjeta del formulario -->
+            <VBox spacing="16.0"
+                  style="-fx-background-color: #101b30;
+                         -fx-background-radius: 12;
+                         -fx-border-color: #344d73;
+                         -fx-border-radius: 12;">
+
+                <padding>
+                    <Insets top="20.0" right="22.0"
+                            bottom="20.0" left="22.0"/>
+                </padding>
+
+                <Label text="Nuevo evento">
+                    <font>
+                        <Font name="Segoe UI Bold" size="20.0"/>
+                    </font>
+                </Label>
+
+                <GridPane hgap="16.0" vgap="12.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100.0"
+                                           prefWidth="110.0"/>
+                        <ColumnConstraints hgrow="ALWAYS"
+                                           fillWidth="true"/>
+                    </columnConstraints>
+
+                    <children>
+                        <Label text="Nombre:"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="txtNombre"
+                                   promptText="Nombre del evento"
+                                   GridPane.rowIndex="0"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Descripción:"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="txtDescripcion"
+                                   promptText="Breve descripción del evento"
+                                   GridPane.rowIndex="1"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Fecha:"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="0"/>
+
+                        <DatePicker fx:id="dpFecha"
+                                    prefWidth="280.0"
+                                    maxWidth="Infinity"
+                                    promptText="Seleccioná una fecha"
+                                    GridPane.rowIndex="2"
+                                    GridPane.columnIndex="1"/>
+
+                        <Label text="Lugar:"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="txtLugar"
+                                   promptText="Ej: Auditorio Principal"
+                                   GridPane.rowIndex="3"
+                                   GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
+
+                <HBox spacing="12.0" alignment="CENTER_RIGHT">
+                    <children>
+                        <Button fx:id="btnVolver"
+                                text="Volver al menú"
+                                styleClass="boton-secundario"
+                                mnemonicParsing="false"
+                                onAction="#regresarPrincipal"/>
+
+                        <Button fx:id="btnGuardar"
+                                text="Guardar evento"
+                                mnemonicParsing="false"
+                                onAction="#guardarEvento"/>
+                    </children>
+                </HBox>
+            </VBox>
+
+            <!-- Tarjeta de la tabla -->
+            <VBox spacing="14.0"
+                  VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: #101b30;
+                         -fx-background-radius: 12;
+                         -fx-border-color: #344d73;
+                         -fx-border-radius: 12;">
+
+                <padding>
+                    <Insets top="20.0" right="22.0"
+                            bottom="20.0" left="22.0"/>
+                </padding>
+
+                <Label text="Eventos registrados">
+                    <font>
+                        <Font name="Segoe UI Bold" size="20.0"/>
+                    </font>
+                </Label>
+
+                <TableView fx:id="tableEventos"
+                           prefHeight="220.0"
+                           minHeight="120.0"
+                           VBox.vgrow="ALWAYS">
+
+                    <placeholder>
+                        <Label text="No hay eventos para mostrar."
+                               style="-fx-text-fill: #9fb5d9;"/>
+                    </placeholder>
+
+                    <columns>
+                        <TableColumn fx:id="colId"
+                                     prefWidth="50.0"
+                                     text="ID"/>
+
+                        <TableColumn fx:id="colNombre"
+                                     prefWidth="180.0"
+                                     text="Nombre"/>
+
+                        <TableColumn fx:id="colDescripcion"
+                                     prefWidth="220.0"
+                                     text="Descripción"/>
+
+                        <TableColumn fx:id="colFechaInicio"
+                                     prefWidth="110.0"
+                                     text="Fecha"/>
+
+                        <TableColumn fx:id="colLugar"
+                                     prefWidth="170.0"
+                                     text="Lugar"/>
+
+                        <TableColumn fx:id="colEstado"
+                                     prefWidth="130.0"
+                                     text="Estado"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
 </BorderPane>

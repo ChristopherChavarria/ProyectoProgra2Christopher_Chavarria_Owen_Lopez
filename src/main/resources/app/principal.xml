@@ -1,43 +1,176 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
-   <top>
-      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Gestor de Eventos Académicos" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label text="Sistema Principal - Primer Avance" textFill="#bdc3c7">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <VBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Seleccione el módulo que desea gestionar:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnGestionEventos" mnemonicParsing="false" onAction="#abrirGestionEventos" prefHeight="40.0" prefWidth="220.0" text="Gestión de Eventos" />
-            <Button fx:id="btnGestionActividades" mnemonicParsing="false" onAction="#abrirGestionActividades" prefHeight="40.0" prefWidth="220.0" text="Gestión de Actividades" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PrincipalController"
+            stylesheets="@estilos.css"
+            styleClass="panel-principal"
+            prefWidth="1200"
+            prefHeight="750"
+            minWidth="850"
+            minHeight="600">
+
+    <left>
+        <VBox prefWidth="250"
+              minWidth="250"
+              spacing="15"
+              styleClass="menu-lateral">
+
+            <padding>
+                <Insets top="35" right="20"
+                        bottom="25" left="20"/>
+            </padding>
+
+            <VBox spacing="3">
+                <Label text="GESTOR"
+                       styleClass="logo-principal"/>
+
+                <Label text="DE EVENTOS"
+                       styleClass="logo-secundario"/>
+
+                <Label text="Panel de administración"
+                       wrapText="true"
+                       styleClass="texto-secundario"/>
+            </VBox>
+
+            <VBox spacing="12"
+                  VBox.vgrow="ALWAYS">
+
+                <padding>
+                    <Insets top="40"/>
+                </padding>
+
+                <Label text="INICIO"
+                       maxWidth="Infinity"
+                       styleClass="menu-activo"/>
+
+                <Label text="Administración de eventos"
+                       wrapText="true"
+                       maxWidth="Infinity"
+                       styleClass="menu-texto"/>
+
+                <Label text="Gestión de actividades"
+                       wrapText="true"
+                       maxWidth="Infinity"
+                       styleClass="menu-texto"/>
+            </VBox>
+
+            <Label text="EIF204 | Programación II"
+                   styleClass="pie-menu"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="24"
+              fillWidth="true"
+              styleClass="contenido-principal">
+
+            <padding>
+                <Insets top="38" right="35"
+                        bottom="32" left="35"/>
+            </padding>
+
+            <VBox spacing="8">
+                <Label text="Panel principal"
+                       styleClass="titulo-principal"/>
+
+                <Label text="Organizá tus eventos desde un solo lugar."
+                       wrapText="true"
+                       styleClass="texto-secundario"/>
+            </VBox>
+
+            <VBox spacing="12"
+                  styleClass="banner-bienvenida">
+
+                <Label text="Tu próximo evento empieza aquí"
+                       wrapText="true"
+                       styleClass="titulo-banner"/>
+
+                <Label text="Seleccioná un módulo para registrar, administrar y consultar información."
+                       wrapText="true"
+                       styleClass="texto-secundario"/>
+            </VBox>
+
+            <HBox spacing="20"
+                  fillHeight="true"
+                  VBox.vgrow="ALWAYS">
+
+                <VBox spacing="18"
+                      minWidth="220"
+                      maxWidth="Infinity"
+                      HBox.hgrow="ALWAYS"
+                      styleClass="tarjeta-eventos">
+
+                    <padding>
+                        <Insets top="28" right="24"
+                                bottom="28" left="24"/>
+                    </padding>
+
+                    <Label text="01"
+                           styleClass="numero-eventos"/>
+
+                    <Label text="Eventos"
+                           styleClass="titulo-tarjeta"/>
+
+                    <Label text="Administrá tus eventos, fechas, ubicaciones y estados desde un solo lugar."
+                           wrapText="true"
+                           maxWidth="Infinity"
+                           styleClass="descripcion-tarjeta"/>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <Button fx:id="btnGestionEventos"
+                            text="Gestionar eventos"
+                            mnemonicParsing="false"
+                            onAction="#abrirGestionEventos"
+                            maxWidth="Infinity"
+                            prefHeight="48"
+                            styleClass="boton-primario"/>
+                </VBox>
+
+                <VBox spacing="18"
+                      minWidth="220"
+                      maxWidth="Infinity"
+                      HBox.hgrow="ALWAYS"
+                      styleClass="tarjeta-actividades">
+
+                    <padding>
+                        <Insets top="28" right="24"
+                                bottom="28" left="24"/>
+                    </padding>
+
+                    <Label text="02"
+                           styleClass="numero-actividades"/>
+
+                    <Label text="Actividades"
+                           styleClass="titulo-tarjeta"/>
+
+                    <Label text="Organizá actividades, horarios, ubicaciones y cupos disponibles."
+                           wrapText="true"
+                           maxWidth="Infinity"
+                           styleClass="descripcion-tarjeta"/>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <Button fx:id="btnGestionActividades"
+                            text="Gestionar actividades"
+                            mnemonicParsing="false"
+                            onAction="#abrirGestionActividades"
+                            maxWidth="Infinity"
+                            prefHeight="48"
+                            styleClass="boton-morado"/>
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
 </BorderPane>
